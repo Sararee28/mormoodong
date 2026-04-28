@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html lang="th">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Menu | Mormoodong</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-green-50 font-sans">
+
+<!-- 🔝 NAVBAR -->
+
+<header class="flex justify-between items-center px-8 py-4 bg-green-700 text-white">
+
+  <h1 class="text-xl font-bold">MORMOODONG</h1>
+
+  <nav class="flex items-center gap-6">
+
+    <a href="index.html" data-lang="home">Home</a>
+
+    <a href="menu.html" data-lang="menu">Menu</a>
+
+    <a href="about.html" data-lang="about">About</a>
+
+    <a href="contact.html" data-lang="contact">Contact</a>
+
+    <div class="ml-4 flex gap-2">
+
+      <button onclick="setLang('th')" class="px-2 py-1 bg-green-500 rounded">TH</button>
+
+      <button onclick="setLang('en')" class="px-2 py-1 bg-green-500 rounded">EN</button>
+
+    </div>
+
+  </nav>
+
+</header>
+
+<!-- 🔍 HEADER -->
+
+<section class="text-center py-10">
+
+  <h1 data-lang="menu_title" class="text-3xl font-bold text-green-800">เมนูอาหาร</h1>
+
+  <input id="search" type="text"
+
+    class="mt-4 px-4 py-2 rounded-lg border w-64"
+
+    placeholder="ค้นหาเมนู...">
+
+  <div class="mt-4 flex justify-center gap-3">
+
+    <button onclick="filterMenu('all')" data-lang="all"
+
+      class="px-4 py-2 bg-green-400 text-white rounded-full">ทั้งหมด</button>
+
+    <button onclick="filterMenu('food')" data-lang="food"
+
+      class="px-4 py-2 bg-green-400 text-white rounded-full">อาหาร</button>
+
+    <button onclick="filterMenu('drink')" data-lang="drink"
+
+      class="px-4 py-2 bg-green-400 text-white rounded-full">เครื่องดื่ม</button>
+
+  </div>
+
+</section>
+
+<!-- 🍱 MENU -->
+
+<section id="menuList" class="grid md:grid-cols-3 gap-6 px-8 pb-16"></section>
+
+<!-- 🪟 MODAL -->
+
+<div id="modal" class="hidden fixed inset-0 bg-black/50 flex justify-center items-center">
+
+  <div class="bg-white p-5 rounded-xl w-80 text-center relative">
+
+    <span onclick="closeModal()" class="absolute right-4 top-2 cursor-pointer text-xl">×</span>
+
+    <img id="modalImg" class="w-full h-52 object-contain bg-gray-50 rounded-lg mb-3">
+
+    <h2 id="modalName" class="font-bold text-lg"></h2>
+
+    <p id="modalNameEn" class="text-sm text-gray-500 italic"></p>
+
+    <p id="modalDesc" class="text-sm text-gray-600 mt-2"></p>
+
+    <p id="modalPrice" class="text-green-700 font-semibold mt-2"></p>
+
+  </div>
+
+</div>
+
+<!-- 🔻 FOOTER -->
+
+<footer class="flex justify-center items-center h-20 bg-green-700 text-white">
+
+  © 2026 Mormoodong Restaurant
+
+</footer>
+
+<script>
+
+/* 🌐 LANGUAGE DATA */
+
+const langData = {
+
+  th: {
+
+    home: "หน้าแรก",
+
+    menu: "เมนู",
+
+    about: "เกี่ยวกับ",
+
+    contact: "ติดต่อ",
+
+    menu_title: "เมนูอาหาร",
+
+    all: "ทั้งหมด",
+
+    food: "อาหาร",
+
+    drink: "เครื่องดื่ม"
+
+  },
+
+  en: {
+
+    home: "Home",
+
+    menu: "Menu",
+
+    about: "About",
+
+    contact: "Contact",
+
+    menu_title: "Menu",
+
+    all: "All",
+
+    food: "Food",
+
+    drink: "Drinks"
+
+  }
+
+};
+
+let currentLang = localStorage.getItem("lang") || "th";
+
+/* 🔥 SET LANGUAGE */
+
+function setLang(lang) {
+
+  currentLang = lang;
+
+  localStorage.setItem("lang", lang);
+
+  document.querySelectorAll("[data-lang]").forEach(el => {
+
+    const key = el.getAttribute("data-lang");
+
+    el.innerText = langData[lang][key];
+
+  });
+
+  document.getElementById("search").placeholder =
+
+    lang === "th" ? "ค้นหาเมนู..." : "Search menu...";
+
+  displayMenu(menuData);
+
+}
+/* 🍱 DATA */
+const menuData = [
+  {
+    name: "หมึกผัดน้ำดำ",
+    name_en: "Stir-Fried Squid in Black Ink",
+    price: 180,
+    category: "food",
+    img: "images/หมึก.webp",
+    desc: "หมึกสดผัดกับน้ำหมึก รสเข้มข้นแบบอาหารใต้แท้"
+  },
+  {
+    name: "มะเขือยาวทอดเครื่อง",
+    name_en: "Spicy Fried Eggplant",
+    price: 150,
+    category: "food",
+    img: "images/มะเขือยาวทอดเครื่อง.webp",
+    desc: "มะเขือยาวทอดคลุกเครื่องแกง หอมเครื่องเทศ"
+  },
+	{
+    name: "หมูคั่วเกลือ",
+    name_en: "Stir-fried Salted Pork",
+    price: 120,
+    category: "food",
+    img: "images/หมูคั่ว.webp",
+    desc: "หมูคั่วเกลือ รสเค็มมัน"
+  },
+	{
+    name: "ปลายัดไส้",
+    name_en: "Spicy Stuffed Fish",
+    price: 90,
+    category: "food",
+    img: "images/ปลายัดไส้.webp",
+    desc: "ปลายัดไส้รสจัดจ้านแบบใต้"
+  },
+	{
+    name: "จ๊อปู",
+    name_en: "Crab Rolls",
+    price: 330,
+    category: "food",
+    img: "images/จ๊อ.webp",
+    desc: "จ๊อปูกรอบนอกนุ่มใน ไส้ปูแน่น เสิร์ฟพร้อมน้ำจิ้มบ๊วย"
+  },
+	{
+    name: "ทอดมันกุ้ง",
+    name_en: "Deep Fried Prawn Cakes",
+    price: 220,
+    category: "food",
+    img: "images/ทอดมันกุ้ง.webp",
+    desc: "ทอดมันกุ้งเนื้อเด้ง ทอดจนกรอบ หอมมัน"
+  },
+	{
+    name: "ปลาทรายทอดขมิ้น",
+    name_en: "Fried Sand Whiting Fish in Turmeric",
+    price: 150,
+    category: "food",
+    img: "images/ปลาทรายทอดขมิ้น.webp",
+    desc: "ปลาทรายหมักขมิ้น หอมเครื่องเทศ ทอดกรอบ"
+  },
+	{
+    name: "ไก่ผัดเม็ดมะม่วง",
+    name_en: "Fried Chicken with Cashew Nuts",
+    price: 200,
+    category: "food",
+    img: "images/ไก่ผัดเม็ดมะม่วง.webp",
+    desc: "ไก่ผัดเม็ดมะม่วง รสหวานเค็มกลมกล่อม"
+  },
+ 	{
+    name: "กุ้งผัดซอสหมอมูดง",
+    name_en: "Stir-fried Shrimp with Mor Mu Dong Sauce",
+    price: 350,
+    category: "food",
+    img: "images/กุ้งผัดซอสหมอมูดง.webp",
+    desc: "กุ้งสดผัดกับซอสสูตรเฉพาะของทางร้าน รสเข้มข้น หอมเครื่องปรุง"
+  },
+	{
+    name: "หอยขมผัดใบชะพลู",
+    name_en: "Stir fried River Snails with Piper Leaves",
+    price: 180,
+    category: "food",
+    img: "images/หอยขมผัดชะพลู.webp",
+    desc: "หอยขมผัดกับใบชะพลู หอมสมุนไพร รสเข้มข้น"
+  },
+	{
+    name: "กุ้งคั่วตะไคร้",
+    name_en: "Stir-fried Prawn with Lemon Grass",
+    price: 220,
+    category: "food",
+    img: "images/กุ้งคั่วตะไคร้.webp",
+    desc: "กุ้งสดผัดตะไคร้ หอมสดชื่น รสจัดจ้านเล็กน้อย"
+  },
+	{
+    name: "ยำน้ำเคยหอยติบ",
+    name_en: "Rock Oysters with Shrimp Paste Salad",
+    price: 170,
+    category: "food",
+    img: "images/หอยติบยำน้ำเคย.webp",
+    desc: "หอยสดคลุกน้ำยำกะปิ รสจัด เปรี้ยว เผ็ด เค็ม ครบเครื่อง"
+  },
+	{
+    name: "ผักเหมียงผัดไข่",
+    name_en: "Stir-fried Miang(Melinjo)Leaves with Eggs",
+    price: 140,
+    category: "food",
+    img: "images/ผักเหมียงผัดไข่.webp",
+    desc: "ผักเหมียงพื้นบ้านผัดไข่ รสกลมกล่อม อร่อยแบบพื้นเมืองใต้"
+  },
+	{
+    name: "ห่อหมกเนื้อปลา",
+    name_en: "Steamed Fish Cake",
+    price: 60,
+    category: "food",
+    img: "images/ห่อหมก.webp",
+    desc: "ห่อหมกเนื้อปลาเนียนนุ่ม หอมกะทิและเครื่องแกง"
+  },
+	{
+    name: "ต้มส้มลำเพ็ง",
+    name_en: "Sour Baby Lampeng(Fern Leaf)Soup",
+    price: 100,
+    category: "food",
+    img: "images/ต้มส้มลำเพ็ง.webp",
+    desc: "แกงส้มรสเปรี้ยวสดชื่น ใช้ผักพื้นบ้าน"
+  },
+	{
+    name: "แกงกะทิปูม้า(กิโลกรัมละ)",
+    name_en: "Blue Crab Curry",
+    price: 1000,
+    category: "food",
+    img: "images/ปูม้าแกงกะทิ.webp",
+    desc: "แกงกะทิเข้มข้นใส่ปูม้าสด เนื้อหวาน หอมแกงใต้"
+  },
+	{
+    name: "แกงส้มปลามงผักรวม",
+    name_en: "Sour Curry with Giant Trevallies Fillet and mixed vegetables",
+    price: 200,
+    category: "food",
+    img: "images/แกงส้มปลามง.webp",
+    desc: "แกงส้มรสเปรี้ยวเผ็ด ใส่ปลามงและผักรวม รสจัดจ้าน"
+  },
+	{
+    name: "หอยหวานต้มตะไคร้",
+    name_en: "Boiled Orient Clams with Lemon Grass",
+    price: 180,
+    category: "food",
+    img: "images/หอยหวานต้มตะไคร้.webp",
+    desc: "หอยหวานต้มกับตะไคร้ น้ำซุปหอม สดชื่น"
+  },
+	{
+    name: "ข้าวคั่ว(S,M,L)",
+    name_en: "Phuket Fried Rice",
+    price: 80,
+    category: "food",
+    img: "images/ข้าวคั่ว.webp",
+    desc: "ข้าวผัดสไตล์ภูเก็ต หอมเครื่องเทศและวัตถุดิบท้องถิ่น"
+  },
+	{
+    name: "น้ำพริกปลาฉิ้งฉ้างทอด",
+    name_en: "Fried Anchovy with Chilli Paste",
+    price: 180,
+    category: "food",
+    img: "images/น้ำพริกฉิ้งฉ้าง.webp",
+    desc: "ปลาตัวเล็กทอดกรอบ เสิร์ฟพร้อมน้ำพริกและผักสด"
+  }, 
+	{
+    name: "น้ำพริกกุ้งเสียบ",
+    name_en: "Crispy Shrimp with Chilli Paste",
+    price: 180,
+    category: "food",
+    img: "images/น้ำพริกกุ้งเสียบ.webp",
+    desc: "น้ำพริกกุ้งเสียบรสเข้มข้น เสิร์ฟพร้อมผักสด"
+  },
+	{
+    name: "ยำไข่แมงดา",
+    name_en: "Horseshoe Crab Eggs Salad",
+    price: 350,
+    category: "food",
+    img: "images/ยำไข่แมงดา.webp",
+    desc: "ยำไข่แมงดารสจัด หอมสมุนไพร เมนูหาทานยาก"
+  },
+	{
+    name: "ยำผักกูด",
+    name_en: "Vegetable Fern Salad",
+    price: 180,
+    category: "food",
+    img: "images/ยำผักกูด.webp",
+    desc: "ผักกูดลวกคลุกน้ำยำ รสเปรี้ยวหวานสดชื่น"
+  },
+	{
+    name: "ยำสาหร่าย",
+    name_en: "Sea Grape Salad",
+    price: 180,
+    category: "food",
+    img: "images/ยำสาหร่าย.webp",
+    desc: "สาหร่ายสดกรอบ คลุกน้ำยำ รสสดชื่น"
+  },
+	{
+    name: "ปลากะพงนึ่งมะนาว(กิโลกรัมละ)",
+    name_en: "Steamed Asian Sea Bass in Lime Sauce",
+    price: 850,
+    category: "food",
+    img: "images/ปลากะพงนึ่งมะนาว.webp",
+    desc: "ปลากะพงนึ่งมะนาวสูตรของทางร้าน"
+  },
+	{
+    name: "ปูดำ/ปูม้า นึ่ง(กิโลกรัมละ)",
+    name_en: "Steamed Mud Crab",
+    price: 1000,
+    category: "food",
+    img: "images/ปูดำนึ่ง.webp",
+    desc: "ปูสดนึ่ง เนื้อหวาน เสิร์ฟพร้อมน้ำจิ้มซีฟู้ด"
+  },
+	{
+    name: "ยำมะพร้าวคั่วโบราณ",
+    name_en: "Mango Salad with Roasted Coconut",
+    price: 200,
+    category: "food",
+    img: "images/ยำมะพร้าวคั่วโบราณ.webp",
+    desc: "ยำมะพร้าวคั่ว รสหวานมัน ผสมเครื่องสมุนไพร"
+  },
+	{
+    name: "ยำหัวปลี",
+    name_en: "Banana Blossom Salad",
+    price: 180,
+    category: "food",
+    img: "images/ยำหัวปลี.webp",
+    desc: "หัวปลีคลุกน้ำยำ รสเปรี้ยวหวานสดชื่น"
+  },
+	{
+    name: "ข้าวผัดไก่(S,M,L)",
+    name_en: "chiken Fried Rice",
+    price: 100,
+    category: "food",
+    img: "images/ข้าวผัดไก่.webp",
+    desc: "ข้าวผัด ผัดกับเนื้อไก่ รสกลมกล่อมเสิร์ฟพร้อมแตงกวาและพริกน้ำปลา"
+  },
+	{
+    name: "ข้าวผัดกุ้ง(S,M,L)",
+    name_en: "Shrimp Fried Rice",
+    price: 100,
+    category: "food",
+    img: "images/ข้าวผัดกุ้ง.webp",
+    desc: "ข้าวผัดกับกุ้งสด รสกลมกล่อมเสิร์ฟพร้อมแตงกวาและพริกน้ำปลา"
+  },
+	{
+    name: "ข้าวผัดหมึก(S,M,L)",
+    name_en: "Squid Fried Rice",
+    price: 100,
+    category: "food",
+    img: "images/ข้าวผัดหมึก.webp",
+    desc: "ข้าวผัดกับหมึกสด รสกลมกล่อมเสิร์ฟพร้อมแตงกวาและพริกน้ำปลา"
+  },
+	{
+    name: "ข้าวผัดซีฟู้ด(S,M,L)",
+    name_en: "Seafood Fried Rice",
+    price: 100,
+    category: "food",
+    img: "images/ข้าวผัดซีฟู้ด.webp",
+    desc: "ข้าวผัดรวมทะเล ใส่กุ้ง หมึก และวัตถุดิบทะเลสด รสกลมกล่อมเสิร์ฟพร้อมแตงกวาและพริกน้ำปลา"
+  },
+	{
+    name: "แกงจืดครบชุด",
+    name_en: "Clear Soup with Tofu and Minced Pork",
+    price: 130,
+    category: "food",
+    img: "images/แกงจืด.webp",
+    desc: "แกงจืดครบรสใส่ทั้งผักกาดขาววุ้นเส้นเต้าหู้หมูสับ"
+  },
+	{
+    name: "น้ำมะพร้าว",
+    name_en: "Coconut Fresh",
+    price: 60,
+    category: "drink",
+    img: "images/มะพร้าว.webp",
+    desc: "น้ำมะพร้าวสดจากลูกมะพร้าว"
+  },
+	{
+    name: "น้ำอ้อย(แก้ว)",
+    name_en: "Sudacane Juice",
+    price: 30,
+    category: "drink",
+    img: "images/อ้อย.webp",
+    desc: "น้ำอ้อยคั้นสด รสหวานจากธรรมชาติ"
+  },
+	{
+    name: "โค้ก",
+    name_en: "Coca-Cola",
+    price: 30,
+    category: "drink",
+    img: "images/โค้ก.webp",
+    desc: "น้ำอัดลมโค้กหวานซ่า ดื่มแล้วสดชื่น"
+  },
+	{
+    name: "โค้กซีโร่",
+    name_en: "Coca-Cola Zero",
+    price: 30,
+    category: "drink",
+    img: "images/โค้กซีโร่.webp",
+    desc: "น้ำอัดลมโค้กสูตรไม่มีน้ำตาล"
+  },
+	{
+    name: "น้ำแดงแฟนต้า",
+    name_en: "Fanta Strawberry",
+    price: 30,
+    category: "drink",
+    img: "images/แดง.webp",
+    desc: "น้ำอัดลมกลิ่นสตรอว์เบอร์รี่ รสหวานซ่า"
+  },
+	{
+    name: "น้ำเขียวแฟนต้า",
+    name_en: "Fanta Green Cream Soda",
+    price: 30,
+    category: "drink",
+    img: "images/เขียว.webp",
+    desc: "น้ำอัดลมกลิ่นครีมโซดา รสหวานหอม สีเขียว"
+  },
+	{
+    name: "น้ำส้มแฟนต้า",
+    name_en: "Fanta Orange",
+    price: 30,
+    category: "drink",
+    img: "images/ส้ม.webp",
+    desc: "น้ำอัดลมกลิ่นส้ม รสหวานซ่า หอมกลิ่นส้ม"
+  },
+	{
+    name: "สไปร์ท",
+    name_en: "Sprite",
+    price: 30,
+    category: "drink",
+    img: "images/สไปร์ท.webp",
+    desc: "น้ำอัดลมกลิ่นเลม่อน-ไลม์ รสซ่าสดชื่น"
+  }
+];
+
+
+/* 🍽️ DISPLAY */
+
+const menuList = document.getElementById("menuList");
+
+function displayMenu(data) {
+
+  menuList.innerHTML = "";
+
+  data.forEach(item => {
+
+    const div = document.createElement("div");
+
+    div.className = "bg-white rounded-xl shadow hover:shadow-xl hover:-translate-y-1 transition cursor-pointer";
+
+    div.innerHTML = `
+
+      <div class="bg-gray-50 h-48 flex items-center justify-center rounded-t-xl overflow-hidden">
+
+        <img src="${item.img}" loading="lazy" class="max-h-full object-contain">
+
+      </div>
+
+      <div class="p-4 text-center">
+
+        <h3 class="font-semibold text-lg text-gray-800">
+
+          ${currentLang === "th" ? item.name : item.name_en}
+
+        </h3>
+
+        <p class="text-green-700 mt-1 font-medium">
+
+          ${item.price.toLocaleString()} ${currentLang === "th" ? "บาท" : "THB"}
+
+        </p>
+
+      </div>
+
+    `;
+
+    div.onclick = () => showDetail(item);
+
+    menuList.appendChild(div);
+
+  });
+
+}
+
+/* 🔍 SEARCH */
+
+document.getElementById("search").addEventListener("input", function() {
+
+  const val = this.value.toLowerCase();
+
+  displayMenu(menuData.filter(item =>
+
+    item.name.toLowerCase().includes(val) ||
+
+    item.name_en.toLowerCase().includes(val)
+
+  ));
+
+});
+
+/* 🧃 FILTER */
+
+function filterMenu(cat) {
+
+  if (cat === "all") return displayMenu(menuData);
+
+  displayMenu(menuData.filter(i => i.category === cat));
+
+}
+
+/* 🪟 MODAL */
+
+function showDetail(item) {
+
+  document.getElementById("modal").classList.remove("hidden");
+
+  document.getElementById("modalImg").src = item.img;
+
+  document.getElementById("modalName").innerText =
+
+    currentLang === "th" ? item.name : item.name_en;
+
+  document.getElementById("modalNameEn").innerText =
+
+    currentLang === "th" ? item.name_en : "";
+
+  document.getElementById("modalDesc").innerText = item.desc;
+
+  document.getElementById("modalPrice").innerText =
+
+    item.price.toLocaleString() + " " + (currentLang === "th" ? "บาท" : "THB");
+
+}
+
+function closeModal() {
+
+  document.getElementById("modal").classList.add("hidden");
+
+}
+
+window.onclick = function(e) {
+
+  if (e.target.id === "modal") closeModal();
+
+};
+
+/* 🚀 INIT */
+
+setLang(currentLang);
+
+</script>
+
+</body>
+
+</html>
