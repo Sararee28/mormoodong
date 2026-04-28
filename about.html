@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Mormoodong</title>
+
+  <!-- ✅ Preload HERO (ช่วย Performance พุ่ง) -->
+  <link rel="preload" as="image" href="images/วิว.webp">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-green-50 font-sans">
+
+<!-- 🔝 NAVBAR -->
+<header class="flex justify-between items-center px-8 py-4 bg-green-700 text-white">
+  <div class="text-xl font-bold">MORMOODONG</div>
+
+  <nav class="flex items-center gap-6">
+    <a href="index.html" data-lang="home">Home</a>
+    <a href="menu.html" data-lang="menu">Menu</a>
+    <a href="about.html" data-lang="about">About</a>
+    <a href="contact.html" data-lang="contact">Contact</a>
+
+    <div class="ml-4 flex gap-2">
+      <button onclick="setLang('th')" class="px-2 py-1 bg-green-500 rounded">TH</button>
+      <button onclick="setLang('en')" class="px-2 py-1 bg-green-500 rounded">EN</button>
+    </div>
+  </nav>
+</header>
+
+<!-- 🏡 HERO (แก้ LCP แล้ว) -->
+<section class="h-[40vh] relative flex items-center justify-center text-white text-center overflow-hidden">
+
+  <!-- ✅ ใช้ img แทน background -->
+  <img src="images/วิว.webp"
+       alt="restaurant view"
+       class="absolute w-full h-full object-cover"
+       fetchpriority="high">
+
+  <!-- overlay -->
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <!-- text -->
+  <h1 class="relative text-4xl font-bold" data-lang="about_title">
+    เกี่ยวกับร้านหมอมูดง
+  </h1>
+
+</section>
+
+<!-- 📖 STORY -->
+<section class="flex flex-col md:flex-row items-center gap-10 px-8 py-16">
+
+  <img src="images/เลื่อน1.webp"
+       width="320"
+       height="200"
+       loading="lazy"
+       alt="story image"
+       class="w-80 rounded-xl shadow">
+
+  <div class="max-w-lg">
+    <h2 class="text-2xl font-bold text-green-800 mb-4" data-lang="story_title">
+      เรื่องราวของเรา
+    </h2>
+
+    <p data-lang="story_text">
+      ร้านหมอมูดงเป็นร้านอาหารพื้นบ้านชื่อดังของภูเก็ต ถ่ายทอดรสชาติอาหารใต้แท้ ๆ จากรุ่นสู่รุ่น โดยใช้วัตถุดิบสดใหม่จากธรรมชาติ
+    </p>
+  </div>
+</section>
+
+<!-- 🌿 CONCEPT -->
+<section class="flex flex-col md:flex-row-reverse items-center gap-10 px-8 py-16 bg-white">
+
+  <img src="images/checkin.webp"
+       width="320"
+       height="200"
+       loading="lazy"
+       alt="checkin"
+       class="w-80 rounded-xl shadow">
+
+  <div class="max-w-lg">
+    <h2 class="text-2xl font-bold text-green-800 mb-4" data-lang="concept_title">
+      จุดเช็คอิน
+    </h2>
+
+    <p data-lang="concept_text">
+      ตอนนี้ทางร้านอาหารหมอมูดงของเราทำจุดเช็คอินใหม่เพื่อให้ลูกค้าทุกคนได้ถ่ายรูปคู่กับป้ายของร้าน
+    </p>
+  </div>
+</section>
+
+<!-- ⭐ HIGHLIGHT -->
+<section class="text-center py-16">
+  <h2 class="text-2xl font-bold text-green-800 mb-8" data-lang="highlight_title">
+    จุดเด่นของร้าน
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-6 px-8">
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h3 class="font-semibold text-lg">🌿 <span data-lang="fresh">วัตถุดิบสดใหม่</span></h3>
+      <p class="text-sm mt-2" data-lang="fresh_desc">คัดสรรจากท้องถิ่น</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h3 class="font-semibold text-lg">🍽️ <span data-lang="authentic">อาหารใต้แท้</span></h3>
+      <p class="text-sm mt-2" data-lang="authentic_desc">รสชาติดั้งเดิม</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+      <h3 class="font-semibold text-lg">🏡 <span data-lang="nature">บรรยากาศธรรมชาติ</span></h3>
+      <p class="text-sm mt-2" data-lang="nature_desc">สงบ ผ่อนคลาย</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 🏆 AWARDS -->
+<section class="py-16 bg-green-50 text-center">
+
+  <h2 class="text-2xl font-bold text-green-800 mb-6" data-lang="awards">
+    รางวัลที่ได้รับ
+  </h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-8">
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m1.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m2.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m3.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m4.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m5.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m6.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m7.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+    <div class="h-32 bg-white rounded-xl shadow flex items-center justify-center">
+      <img src="images/m8.webp" loading="lazy" class="max-h-full object-contain">
+    </div>
+
+  </div>
+
+</section>
+
+<!-- 🔻 FOOTER -->
+<footer class="flex justify-center items-center h-20 bg-green-700 text-white">
+  © 2026 Mormoodong Restaurant
+</footer>
+
+<!-- 🌐 LANGUAGE -->
+<script>
+const langData = {
+  th: {
+    home: "หน้าแรก",
+    menu: "เมนู",
+    about: "เกี่ยวกับ",
+    contact: "ติดต่อ",
+    about_title: "เกี่ยวกับร้านหมอมูดง",
+    story_title: "เรื่องราวของเรา",
+    story_text: "ร้านหมอมูดงเป็นร้านอาหารพื้นบ้านชื่อดังของภูเก็ต ถ่ายทอดรสชาติอาหารใต้แท้ ๆ จากรุ่นสู่รุ่น โดยใช้วัตถุดิบสดใหม่จากธรรมชาติ",
+    concept_title: "จุดเช็คอิน",
+    concept_text: "ตอนนี้ทางร้านอาหารหมอมูดงของเราทำจุดเช็คอินใหม่เพื่อให้ลูกค้าทุกคนได้ถ่ายรูปคู่กับป้ายของร้าน",
+    highlight_title: "จุดเด่นของร้าน",
+    fresh: "วัตถุดิบสดใหม่",
+    fresh_desc: "คัดสรรจากท้องถิ่น",
+    authentic: "อาหารใต้แท้",
+    authentic_desc: "รสชาติดั้งเดิม",
+    nature: "บรรยากาศธรรมชาติ",
+    nature_desc: "สงบ ผ่อนคลาย",
+    awards: "รางวัลที่ได้รับ"
+  },
+  en: {
+    home: "Home",
+    menu: "Menu",
+    about: "About",
+    contact: "Contact",
+    about_title: "About Mormoodong",
+    story_title: "Our Story",
+    story_text: "Mormoodong is a famous local restaurant in Phuket offering authentic Southern Thai cuisine.",
+    concept_title: "Check-in Spot",
+    concept_text: "A new photo spot for visitors to take pictures with our restaurant sign.",
+    highlight_title: "Highlights",
+    fresh: "Fresh Ingredients",
+    fresh_desc: "Locally sourced",
+    authentic: "Authentic Taste",
+    authentic_desc: "Traditional recipes",
+    nature: "Natural Atmosphere",
+    nature_desc: "Calm and relaxing",
+    awards: "Awards"
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem("lang", lang);
+  document.querySelectorAll("[data-lang]").forEach(el => {
+    const key = el.getAttribute("data-lang");
+    el.innerText = langData[lang][key];
+  });
+}
+
+setLang(localStorage.getItem("lang") || "th");
+</script>
+
+</body>
+</html>

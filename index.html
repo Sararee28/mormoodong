@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mormoodong</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-green-50 font-sans">
+
+<!-- 🔝 NAVBAR -->
+<header class="flex justify-between items-center px-8 py-4 bg-green-700 text-white sticky top-0 z-50">
+  <h1 class="text-xl font-bold">MORMOODONG</h1>
+
+  <nav class="flex items-center gap-6">
+    <a href="index.html" data-lang="home">Home</a>
+    <a href="menu.html" data-lang="menu">Menu</a>
+    <a href="about.html" data-lang="about">About</a>
+    <a href="contact.html" data-lang="contact">Contact</a>
+
+    <div class="ml-4 flex gap-2">
+      <button onclick="setLang('th')" class="px-2 py-1 bg-green-500 rounded">TH</button>
+      <button onclick="setLang('en')" class="px-2 py-1 bg-green-500 rounded">EN</button>
+    </div>
+  </nav>
+</header>
+
+<!-- 🌿 HERO -->
+<section class="h-[80vh] relative flex items-center justify-center text-white text-center overflow-hidden">
+
+  <img src="images/วิว.webp"
+       alt="restaurant"
+       class="absolute w-full h-full object-cover"
+       fetchpriority="high">
+
+  <div class="absolute inset-0 bg-black/50"></div>
+
+  <div class="relative p-8">
+    <h1 class="text-4xl font-bold" data-lang="hero_title">
+      สัมผัสรสชาติธรรมชาติแห่งภูเก็ต
+    </h1>
+
+    <p class="mt-4" data-lang="hero_sub">
+      ประสบการณ์อาหารท้องถิ่นแท้ในทุกคำ
+    </p>
+
+    <a href="menu.html"
+      class="mt-6 inline-block px-6 py-2 bg-green-500 rounded hover:bg-green-600 hover:scale-105 transition text-white"
+      data-lang="explore">
+      ดูเมนู
+    </a>
+  </div>
+</section>
+
+<!-- 🏡 ข้อความแนะนำร้าน (เพิ่มแล้ว) -->
+<section class="py-16 px-8 text-center bg-green-100">
+
+  <h2 class="text-2xl font-bold text-green-800 mb-4" data-lang="about_home">
+    ร้านหมอมูดง
+  </h2>
+
+  <p class="max-w-2xl mx-auto text-gray-700 leading-relaxed" data-lang="about_home_text">
+    ร้านหมอมูดงเป็นร้านอาหารพื้นบ้านชื่อดังของจังหวัดภูเก็ต 
+    ที่นำเสนอรสชาติอาหารใต้แท้ ๆ จากวัตถุดิบสดใหม่ในท้องถิ่น 
+    บรรยากาศร้านเป็นธรรมชาติ รายล้อมด้วยต้นไม้และบ่อน้ำ 
+    เหมาะสำหรับการมาพักผ่อนและสัมผัสอาหารพื้นเมืองอย่างแท้จริง
+  </p>
+
+</section>
+
+<!-- ⭐ SIGNATURE -->
+<section class="py-16 text-center">
+  <h2 class="text-2xl font-bold text-green-800 mb-6" data-lang="signature">
+    เมนูแนะนำ
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-6 px-8">
+
+    <div class="bg-white rounded-xl shadow hover:scale-105 transition">
+      <img src="images/ปลายัดไส้.webp" loading="lazy" width="400" height="300"
+           class="w-full h-48 object-cover rounded-t-xl">
+      <h3 class="mt-3 font-semibold" id="food1">ปลายัดไส้</h3>
+      <p id="price1">90 บาท</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow hover:scale-105 transition">
+      <img src="images/หมูคั่ว.webp" loading="lazy" width="400" height="300"
+           class="w-full h-48 object-cover rounded-t-xl">
+      <h3 class="mt-3 font-semibold" id="food2">หมูคั่วเกลือ</h3>
+      <p id="price2">120 บาท</p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow hover:scale-105 transition">
+      <img src="images/หมึก.webp" loading="lazy" width="400" height="300"
+           class="w-full h-48 object-cover rounded-t-xl">
+      <h3 class="mt-3 font-semibold" id="food3">หมึกผัดน้ำดำ</h3>
+      <p id="price3">150 บาท</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 🌄 บรรยากาศร้าน -->
+<section class="py-16 text-center bg-white">
+  <h2 class="text-2xl font-bold text-green-800 mb-6" data-lang="gallery">
+    บรรยากาศร้าน
+  </h2>
+
+  <div class="grid md:grid-cols-3 gap-6 px-8">
+
+    <div class="h-56 rounded-xl overflow-hidden shadow">
+      <img src="images/วิว.webp" loading="lazy" width="400" height="300"
+           class="w-full h-full object-cover">
+    </div>
+
+    <div class="h-56 rounded-xl overflow-hidden shadow">
+      <img src="images/เลื่อน1.webp" loading="lazy" width="400" height="300"
+           class="w-full h-full object-cover">
+    </div>
+
+    <div class="h-56 rounded-xl overflow-hidden shadow">
+      <img src="images/วิว2.webp" loading="lazy" width="400" height="300"
+           class="w-full h-full object-cover">
+    </div>
+
+  </div>
+</section>
+
+<!-- 🔻 FOOTER -->
+<footer class="flex justify-center items-center h-20 bg-green-700 text-white">
+  © 2026 Mormoodong Restaurant
+</footer>
+
+<!-- 🌐 LANGUAGE -->
+<script>
+const langData = {
+  th: {
+    home: "หน้าแรก",
+    menu: "เมนู",
+    about: "เกี่ยวกับ",
+    contact: "ติดต่อ",
+    hero_title: "สัมผัสรสชาติธรรมชาติแห่งภูเก็ต",
+    hero_sub: "ประสบการณ์อาหารท้องถิ่นแท้ในทุกคำ",
+    explore: "ดูเมนู",
+    signature: "เมนูแนะนำ",
+    gallery: "บรรยากาศร้าน",
+    about_home: "ร้านหมอมูดง",
+    about_home_text: "ร้านหมอมูดงเป็นร้านอาหารพื้นบ้านชื่อดังของจังหวัดภูเก็ต ที่นำเสนอรสชาติอาหารใต้แท้ ๆ จากวัตถุดิบสดใหม่ในท้องถิ่น บรรยากาศร้านเป็นธรรมชาติ เหมาะสำหรับการพักผ่อน"
+  },
+  en: {
+    home: "Home",
+    menu: "Menu",
+    about: "About",
+    contact: "Contact",
+    hero_title: "Experience Phuket's Natural Flavors",
+    hero_sub: "Authentic local taste in every bite",
+    explore: "Explore Menu",
+    signature: "Signature Dishes",
+    gallery: "Restaurant Atmosphere",
+    about_home: "Mormoodong Restaurant",
+    about_home_text: "Mormoodong is a famous local restaurant in Phuket offering authentic Southern Thai cuisine with fresh ingredients in a natural atmosphere."
+  }
+};
+
+function setLang(lang) {
+  localStorage.setItem("lang", lang);
+
+  document.querySelectorAll("[data-lang]").forEach(el => {
+    el.innerText = langData[lang][el.getAttribute("data-lang")];
+  });
+
+  if (lang === "en") {
+    food1.innerText = "Stuffed Fish";
+    food2.innerText = "Salted Pork";
+    food3.innerText = "Squid in Black Ink";
+
+    price1.innerText = "90 THB";
+    price2.innerText = "120 THB";
+    price3.innerText = "150 THB";
+  } else {
+    food1.innerText = "ปลายัดไส้";
+    food2.innerText = "หมูคั่วเกลือ";
+    food3.innerText = "หมึกผัดน้ำดำ";
+
+    price1.innerText = "90 บาท";
+    price2.innerText = "120 บาท";
+    price3.innerText = "150 บาท";
+  }
+}
+
+setLang(localStorage.getItem("lang") || "th");
+</script>
+
+</body>
+</html>
